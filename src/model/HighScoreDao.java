@@ -20,7 +20,7 @@ public enum HighScoreDao {
 		ArrayList<String> names2 = new ArrayList<String>();
 		names2.add("Bert");
 		names2.add("Ernie");
-	    highScore = new HighScore("1", 20, new int[]{20,15},names2);
+	    highScore = new HighScore("2", 20, new int[]{20,15},names2);
 	    contentProvider.put("2", highScore);
   }
   

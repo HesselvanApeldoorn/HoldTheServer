@@ -76,8 +76,6 @@ public class HighScoresResource {
 	        output += "</table><br><br>";
 	    }
 	    output += "<br>";
-	    output += "<div id='chart_div' style='float:left; width: 500px; height: 500px;''></div>";
-	    output += "<div id='chart_div2' style='float:left; width: 500px; height: 500px;''></div>";
 	    output += "</body>" + "</html> ";
 		return output;
 	}
