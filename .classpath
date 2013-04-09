@@ -13,6 +13,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="/home/s1881140/glassfish/glassfish3/glassfish/lib/javaee.jar"/>
+	<classpathentry kind="lib" path="/home/s1881140/glassfish3/glassfish/lib/javaee.jar"/>
+	<classpathentry kind="lib" path="/home/s1881140/glassfish3/glassfish/lib/appserv-rt.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

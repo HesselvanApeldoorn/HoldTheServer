@@ -8,13 +8,13 @@ import model.HighScore;
 import model.HighScoreDao;
 
 import rmiBase.HighScoreHost;
-import rmiBase.Task;
+import rmiBase.HighScoreTask;
 
 
 public class SendHighScore implements HighScoreHost {
 
 	@Override
-	public void executeTask(Task<HighScore> t, HighScore h) throws RemoteException {
+	public void executeTask(HighScoreTask<HighScore> t, HighScore h) throws RemoteException {
 		t.execute(h);
 	}
 
