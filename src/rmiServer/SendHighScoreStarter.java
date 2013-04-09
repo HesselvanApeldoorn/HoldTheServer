@@ -27,7 +27,7 @@ public class SendHighScoreStarter extends RmiStarter {
 	@Override
 	public void start() {
 		try {
-			HighScoreHost engine = new SendHost();
+			HighScoreHost engine = new SendHighScore();
 			
 			HighScoreHost engineStub = (HighScoreHost) UnicastRemoteObject.exportObject(engine, 0);
 			LocateRegistry.createRegistry(2525);  

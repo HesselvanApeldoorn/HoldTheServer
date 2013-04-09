@@ -11,7 +11,7 @@ import rmiBase.HighScoreHost;
 import rmiBase.Task;
 
 
-public class SendHost implements HighScoreHost {
+public class SendHighScore implements HighScoreHost {
 
 	@Override
 	public void executeTask(Task<HighScore> t, HighScore h) throws RemoteException {

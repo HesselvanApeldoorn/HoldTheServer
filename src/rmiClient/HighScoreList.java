@@ -8,7 +8,7 @@ import model.HighScoreDao;
 
 import rmiBase.Task;
 
-public class HostList implements Task<HighScore>, Serializable {
+public class HighScoreList implements Task<HighScore>, Serializable {
 
 	/**
 	 * 
@@ -18,7 +18,7 @@ public class HostList implements Task<HighScore>, Serializable {
 	 * 
 	 */
 	
-	public HostList() {System.out.println("hostlist constructor");}
+	public HighScoreList() {System.out.println("hostlist constructor");}
 	
 	public void execute(HighScore h) {
 		HighScoreDao.instance.getModel().put(h.getId(), h);
