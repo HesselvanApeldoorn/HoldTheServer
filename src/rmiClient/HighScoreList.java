@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import model.HighScore;
 import model.HighScoreDao;
 
-import rmiBase.Task;
+import rmiBase.HighScoreTask;
 
-public class HighScoreList implements Task<HighScore>, Serializable {
+public class HighScoreList implements HighScoreTask<HighScore>, Serializable {
 
 	/**
 	 * 

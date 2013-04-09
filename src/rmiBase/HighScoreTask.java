@@ -1,9 +1,7 @@
 package rmiBase;
 
-import java.util.ArrayList;
-
 import model.HighScore;
 
-public interface Task<T> {
+public interface HighScoreTask<T> {
     void execute(HighScore knownHosts);
 }
