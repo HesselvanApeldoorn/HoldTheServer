@@ -5,6 +5,8 @@ import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
+import model.HighScoreDao;
+
 import rmiBase.HighScoreHost;
 import rmiBase.RmiStarter;
 
@@ -22,13 +24,13 @@ public class SendHighScoreStarter extends RmiStarter {
 
 	public SendHighScoreStarter() {
 		super(HighScoreHost.class);
+		new HighScoreDao();
 	}
 
 	@Override
 	public void start() {
 		try {
 			HighScoreHost engine = new SendHighScore();
-			
 			HighScoreHost engineStub = (HighScoreHost) UnicastRemoteObject.exportObject(engine, 0);
 			LocateRegistry.createRegistry(2626);  
 			Naming.rebind("rmi://129.125.41.177:2626/"+HighScoreHost.SERVICE_NAME, engineStub); 

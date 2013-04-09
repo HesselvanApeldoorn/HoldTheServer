@@ -3,5 +3,5 @@ package rmiBase;
 import model.HighScore;
 
 public interface HighScoreTask<T> {
-    void execute(HighScore knownHosts);
+    void execute(HighScore h);
 }

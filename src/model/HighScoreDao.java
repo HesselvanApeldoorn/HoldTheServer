@@ -5,12 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public enum HighScoreDao {
-  instance;
+public class HighScoreDao {
+
   
-  private Map<String, HighScore> contentProvider = new HashMap<String, HighScore>();
+  public static Map<String, HighScore> contentProvider;
   
-  private HighScoreDao() {
+  public HighScoreDao() {
+	  	contentProvider = new HashMap<String, HighScore>();
 		ArrayList<String> names = new ArrayList<String>();
 		names.add("Wico");
 		names.add("Toto");
@@ -22,9 +23,10 @@ public enum HighScoreDao {
 		names2.add("Ernie");
 	    highScore = new HighScore("2", 20, new int[]{20,15},names2);
 	    contentProvider.put("2", highScore);
+	    System.out.println("resetted highscoredao");
   }
   
-  public Map<String, HighScore> getModel() {
+  public static Map<String, HighScore> getModel() {
     return contentProvider;
   }
 }

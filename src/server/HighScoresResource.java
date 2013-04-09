@@ -1,16 +1,10 @@
 package server;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -36,7 +30,7 @@ public class HighScoresResource {
 	@Produces(MediaType.TEXT_XML)
 	public List<HighScore> getHighScoresBrowser() {
 		List<HighScore> HighScores = new ArrayList<HighScore>();
-		HighScores.addAll(HighScoreDao.instance.getModel().values());
+		HighScores.addAll(HighScoreDao.getModel().values());
 		return HighScores; 
 	}
 	
@@ -44,9 +38,9 @@ public class HighScoresResource {
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public List<HighScore> getHighScores() {
-	 List<HighScore> HighScores = new ArrayList<HighScore>();
-	 HighScores.addAll(HighScoreDao.instance.getModel().values());
-	 return HighScores; 
+	 List<HighScore> highScores = new ArrayList<HighScore>();
+	 highScores.addAll(HighScoreDao.getModel().values());
+	 return highScores; 
 	}
 	
 	
@@ -54,7 +48,7 @@ public class HighScoresResource {
 	@Path("count")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getCount() {
-		int count = HighScoreDao.instance.getModel().size();
+		int count = HighScoreDao.getModel().size();
 		return String.valueOf(count);
 	}
 	

@@ -21,7 +21,9 @@ public class HighScoreList implements HighScoreTask<HighScore>, Serializable {
 	public HighScoreList() {System.out.println("hostlist constructor");}
 	
 	public void execute(HighScore h) {
-		HighScoreDao.instance.getModel().put(h.getId(), h);
+		HighScoreDao.getModel().put(h.getId(), h);
+		System.out.println(h.getId());
+		System.out.println(HighScoreDao.getModel().values());
 		//		ArrayList<String> list = new ArrayList<String>();
 //		list.add("naam");
 //		HighScore room = new HighScore("Gasdrsdfgap", 5 , list); 
