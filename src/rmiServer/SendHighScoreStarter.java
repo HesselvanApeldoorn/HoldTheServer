@@ -31,7 +31,7 @@ public class SendHighScoreStarter extends RmiStarter {
 			
 			HighScoreHost engineStub = (HighScoreHost) UnicastRemoteObject.exportObject(engine, 0);
 			LocateRegistry.createRegistry(2525);  
-			Naming.rebind("rmi://129.125.41.177:2526/"+HighScoreHost.SERVICE_NAME, engineStub); 
+			Naming.rebind("rmi://129.125.41.177:2626/"+HighScoreHost.SERVICE_NAME, engineStub); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
