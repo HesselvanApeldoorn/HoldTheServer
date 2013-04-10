@@ -11,17 +11,11 @@ import rmiBase.HighScoreHost;
 import rmiBase.RmiStarter;
 
 
-/**
- * start the server component. this exposes the an implementation of the Compute
- * interface as a service over RMI An RMI server program needs to create the
- * initial remote objects and export them to the RMI runtime, which makes them
- * available to receive incoming remote invocations.
- * 
- * @author srasul
- * 
- */
 public class SendHighScoreStarter extends RmiStarter {
 
+	public final static String ipAddress = "129.125.41.141";
+	public final static int port = 2626;
+	
 	public SendHighScoreStarter() {
 		super(HighScoreHost.class);
 		new HighScoreDao();
@@ -32,8 +26,8 @@ public class SendHighScoreStarter extends RmiStarter {
 		try {
 			HighScoreHost engine = new SendHighScore();
 			HighScoreHost engineStub = (HighScoreHost) UnicastRemoteObject.exportObject(engine, 0);
-			LocateRegistry.createRegistry(2626);  
-			Naming.rebind("rmi://129.125.41.177:2626/"+HighScoreHost.SERVICE_NAME, engineStub); 
+			LocateRegistry.createRegistry(SendHighScoreStarter.port);  
+			Naming.rebind("rmi://"+SendHighScoreStarter.ipAddress +":"+SendHighScoreStarter.port+"/"+HighScoreHost.SERVICE_NAME, engineStub); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
