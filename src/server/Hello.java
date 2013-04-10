@@ -1,6 +1,7 @@
 package server;
 
 import javax.jws.WebMethod;
+import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -21,16 +22,15 @@ public class Hello {
     	this.message =message;}
 
     @WebMethod
-    @Path("/a")
-	@GET
-	@Produces(MediaType.TEXT_HTML)
+    @WebResult(name="EchoStructReturnMessage",
+    targetNamespace="192.168.178.11:8081:HoldTheServer/ple2")
     public String sayHello() {
         return message + ".";
     }
     
 	@GET
 	@Path("count")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.TEXT_HTML)
 	public static String getCount() {
 		return "6";
 	}
