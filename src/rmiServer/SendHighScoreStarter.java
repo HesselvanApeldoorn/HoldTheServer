@@ -13,7 +13,7 @@ import rmiBase.RmiStarter;
 
 public class SendHighScoreStarter extends RmiStarter {
 
-	public final static String ipAddress = "129.125.157.86";
+	public final static String ipAddress = "192.168.178.11";
 	public final static int port = 2626;
 	
 	public SendHighScoreStarter() {
