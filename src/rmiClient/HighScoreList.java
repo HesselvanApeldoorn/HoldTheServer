@@ -7,6 +7,7 @@ import model.HighScore;
 import model.HighScoreDao;
 
 import rmiBase.HighScoreTask;
+import server.HighScoresResource;
 
 public class HighScoreList implements HighScoreTask<HighScore>, Serializable {
 
@@ -21,14 +22,10 @@ public class HighScoreList implements HighScoreTask<HighScore>, Serializable {
 	public HighScoreList() {System.out.println("hostlist constructor");}
 	
 	public void execute(HighScore h) {
-		HighScoreDao.getModel().put(h.getId(), h);
+		HighScoreDao.contentProvider.put(h.getId(), h);
 		System.out.println(h.getId());
-		System.out.println(HighScoreDao.getModel().values());
-		//		ArrayList<String> list = new ArrayList<String>();
-//		list.add("naam");
-//		HighScore room = new HighScore("Gasdrsdfgap", 5 , list); 
-//		knownHosts.add(room);
-//		return knownHosts;
+		System.out.println(HighScoreDao.contentProvider.values());
+		HighScoresResource.add(HighScoreDao.contentProvider);
 	}
 	public void getHost() {
 		

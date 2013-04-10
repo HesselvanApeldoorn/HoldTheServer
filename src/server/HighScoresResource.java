@@ -2,6 +2,7 @@ package server;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -10,6 +11,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.UriInfo;
+import javax.xml.ws.Endpoint;
+import javax.xml.ws.ServiceMode;
+import javax.xml.ws.WebServiceProvider;
+import javax.xml.ws.http.HTTPBinding;
 
 import model.HighScore;
 import model.HighScoreDao;
@@ -28,18 +33,18 @@ public class HighScoresResource {
 	// Return the list of HighScores to the user in the browser
 	@GET
 	@Produces(MediaType.TEXT_XML)
-	public List<HighScore> getHighScoresBrowser() {
+	public static List<HighScore> getHighScoresBrowser() {
 		List<HighScore> HighScores = new ArrayList<HighScore>();
-		HighScores.addAll(HighScoreDao.getModel().values());
+		HighScores.addAll(HighScoreDao.contentProvider.values());
 		return HighScores; 
 	}
 	
 	// Return the list of HighScores for applications
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public List<HighScore> getHighScores() {
+	public static List<HighScore> getHighScores() {
 	 List<HighScore> highScores = new ArrayList<HighScore>();
-	 highScores.addAll(HighScoreDao.getModel().values());
+	 highScores.addAll(HighScoreDao.contentProvider.values());
 	 return highScores; 
 	}
 	
@@ -47,30 +52,44 @@ public class HighScoresResource {
 	@GET
 	@Path("count")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String getCount() {
-		int count = HighScoreDao.getModel().size();
+	public static String getCount() {
+		int count = HighScoreDao.contentProvider.size();
 		return String.valueOf(count);
 	}
 	
 	// This method is called if HTML is request
 	@GET
 	@Produces(MediaType.TEXT_HTML)
-	public String sayHtmlHello() {
+	public static String sayHtmlHello() {
 		String output = "";
 		output += "<html> " + "<head>" + "<title>" + "HighScore system" + "</title>" +
 				"</head>" + "<body>";
 	    output += "<h2>Highscores:</h2>";
-	    for(int i=0; i<this.getHighScoresBrowser().size();i++) {
-	        output += "<br>Maximum points: <a href='/RESTHighScore/rest/HighScores/" + this.getHighScoresBrowser().get(i).getId() + "'> " + this.getHighScoresBrowser().get(i).getMaxPoints() + "</a>";
-	        HighScore highScore = this.getHighScores().get(i);
+	    output += HighScoreDao.contentProvider;
+	    for(int i=0; i<getHighScoresBrowser().size();i++) {
+	        output += "<br>Maximum points: <a href='/RESTHighScore/rest/HighScores/" + getHighScoresBrowser().get(i).getId() + "'> " + getHighScoresBrowser().get(i).getMaxPoints() + "</a>";
+	        HighScore highScore = getHighScores().get(i);
 	        output += "<table border='1'> <tr><th>Name</th><th>Score</th></tr>";
 	        for(int j=0; j<highScore.getScores().length; j++) {
-	        	output += "<tr><td>" + highScore.getNames().get(j) + "</td><td>" + highScore.getScores()[j] + "</td></tr>";
+	        	output += "hoi";//"<tr><td>" + highScore.getNames().get(j) + "</td><td>" + highScore.getScores()[j] + "</td></tr>";
 	        }
 	        output += "</table><br><br>";
 	    }
 	    output += "<br>";
 	    output += "</body>" + "</html> ";
 		return output;
+	}
+	
+	public static void add(Map<String, HighScore> contentProvider2) {
+		HighScoreDao.contentProvider = contentProvider2;
+		System.out.println(HighScoreDao.contentProvider.values());
+		System.out.println(getCount());
+		System.out.println(sayHtmlHello());
+	      Endpoint e = Endpoint.create(
+                  new Hello("hoiii"));
+	      System.out.println("waar foute?");
+//	      e.publish("http://192.168.178.11:8080/HoldTheServer/rest/HighScores");
+	      e.publish("http://192.168.178.11:8081/HoldTheServer/plek");
+
 	}
 }

@@ -25,8 +25,4 @@ public class HighScoreDao {
 	    contentProvider.put("2", highScore);
 	    System.out.println("resetted highscoredao");
   }
-  
-  public static Map<String, HighScore> getModel() {
-    return contentProvider;
-  }
 }
