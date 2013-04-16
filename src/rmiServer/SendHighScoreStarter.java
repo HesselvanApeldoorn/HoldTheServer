@@ -54,7 +54,7 @@ public class SendHighScoreStarter extends RmiStarter {
 	}
 
 	private static URI getBaseURI() {
-		 return UriBuilder.fromUri("http://129.125.74.37:8080/HoldTheServer").build();
+		 return UriBuilder.fromUri("http://"+ipAddress+":8080/HoldTheServer").build();
 	}
 
 	@Override
