@@ -43,7 +43,9 @@ public class HighScoresResource {
 	@Produces(MediaType.TEXT_XML)
 	public static List<HighScore> getHighScoresBrowser() {
 		List<HighScore> HighScores = new ArrayList<HighScore>();
-		HighScores.addAll(HighScoreDao.contentProvider.values());
+		if(HighScoreDao.contentProvider != null) {
+			HighScores.addAll(HighScoreDao.contentProvider.values());
+		}
 		return HighScores; 
 	}
 	
@@ -69,10 +71,20 @@ public class HighScoresResource {
 	@Path("count")
 	@Produces(MediaType.TEXT_HTML)
 	public static String getCount() {
-		int count = HighScoreDao.contentProvider.size();
-//		Hello hello = new Hello("foi");
-//		return hello.sayHello();
+		int count = 0;
+		if(HighScoreDao.contentProvider!=null) {
+			count = HighScoreDao.contentProvider.size();
+		}
 		return String.valueOf(count);
+	}
+	
+	private boolean isInteger(String str) {
+	    try {
+	        Integer.parseInt(str);
+	        return true;
+	    } catch (NumberFormatException nfe) {
+	        return false;
+	    }
 	}
 	
 	// This method is called if HTML is request
@@ -87,10 +99,10 @@ public class HighScoresResource {
 	    output += HighScoreDao.contentProvider;
 	    for(int i=0; i<getHighScoresBrowser().size();i++) {
 	        output += "<br>Maximum points: <a href='/RESTHighScore/rest/HighScores/" + getHighScoresBrowser().get(i).getId() + "'> " + getHighScoresBrowser().get(i).getMaxPoints() + "</a>";
-	        HighScore highScore = getHighScores().get(i);
+	        HighScore highScore = getHighScoresBrowser().get(i);
 	        output += "<table border='1'> <tr><th>Name</th><th>Score</th></tr>";
-	        for(int j=0; j<highScore.getScores().length; j++) {
-	        	output += "hoi";//"<tr><td>" + highScore.getNames().get(j) + "</td><td>" + highScore.getScores()[j] + "</td></tr>";
+	        for(int j=0; j<highScore.getScores().size(); j++) {
+	        	output += "<tr><td>" + highScore.getNames().get(j) + "</td><td>" + highScore.getScores().get(j) + "</td></tr>";
 	        }
 	        output += "</table><br><br>";
 	    }
@@ -106,26 +118,4 @@ public class HighScoresResource {
 	        HighScoreDao.contentProvider.put(highScore.getValue().getId(), highScore.getValue());
 	        System.out.println(HighScoreDao.contentProvider.values());
     }
-	
-//	@PUT
-//	@Consumes(MediaType.APPLICATION_XML)
-//	@Produces(MediaType.APPLICATION_XML)
-//    public static void update(Map<String, HighScore> cp) {
-//		System.out.println("in update");
-//        HighScoreDao.contentProvider=cp;
-//    }
-	
-	public static void add(Map<String, HighScore> contentProvider2) {
-		HighScoreDao.contentProvider = contentProvider2;
-		System.out.println(HighScoreDao.contentProvider.values());
-//		update((JAXBElement<Map<String, HighScore>>) contentProvider2);
-		System.out.println(getCount());
-		System.out.println(sayHtmlHello());
-	      Endpoint e = Endpoint.create(
-                  new Hello("hoiii"));
-	      System.out.println("waar foute?");
-//	      e.publish("http://192.168.178.11:8080/HoldTheServer/rest/HighScores");
-//	      e.publish("http://192.168.178.11:8081/HoldTheServer/plek");
-	      
-	}
 }

@@ -30,27 +30,32 @@ public class SendHighScoreStarter extends RmiStarter {
 	
 	public SendHighScoreStarter() {
 		super(HighScoreHost.class);
+
 		new HighScoreDao();
 	    ClientConfig config = new DefaultClientConfig();
 	    Client client = Client.create(config);
 	    WebResource service = client.resource(getBaseURI());
-	    // Fluent interfaces
+
 	    System.out.println(service.path("rest").path("HighScores").accept(MediaType.TEXT_HTML).get(ClientResponse.class).toString());
-	    System.out.println(service.path("rest").path("HighScores").path("new").accept(MediaType.TEXT_HTML).get(ClientResponse.class).toString());
-	    System.out.println("a");
-	    System.out.println(HighScoreDao.contentProvider.values());
-		ArrayList<String> names = new ArrayList<String>();
-		names.add("Wico");
-		names.add("Toto");
-		names.add("Africa");
-		System.out.println("Total number of polls:" + service.path("rest").path("HighScores").path("count").accept(MediaType.TEXT_HTML).get(String.class));
-	    System.out.println(service.path("rest").path("HighScores").accept(MediaType.TEXT_PLAIN).put(
-	    		ClientResponse.class, new HighScore("3", 30, new int[]{40,30, 24},names)).toString());
-		System.out.println("Total number of polls:" + service.path("rest").path("HighScores").path("count").accept(MediaType.TEXT_HTML).get(String.class));
+	    String amountScores = service.path("rest").path("HighScores").path("count").accept(MediaType.TEXT_HTML).get(ClientResponse.class).toString();
+	    int amountHighScore = 0;
+	    if(isInteger(amountScores)) {
+	    	amountHighScore = Integer.parseInt(amountScores);
+	    } else {
+	    	amountHighScore = 0;
+	    }
+	    if(amountHighScore <= 0) {
+		    service.path("rest").path("HighScores").path("new").accept(MediaType.TEXT_HTML).get(ClientResponse.class).toString();
+	    }
+	}
 
-	    System.out.println(HighScoreDao.contentProvider.values());
-
-	    System.out.println("b");
+	private boolean isInteger(String str) {
+	    try {
+	        Integer.parseInt(str);
+	        return true;
+	    } catch (NumberFormatException nfe) {
+	        return false;
+	    }
 	}
 
 	private static URI getBaseURI() {

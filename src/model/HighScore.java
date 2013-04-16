@@ -3,7 +3,6 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -12,19 +11,16 @@ public class HighScore implements Serializable {
 	private static final long serialVersionUID = 1556065201700688552L;
 	private String id;
 	private int maxPoints;
-	private int[] scores;
+	private ArrayList<Integer> scores;
 	private ArrayList<String> names; 
 	
-	public HighScore() {};
-	
-	public HighScore(String id, int maxPoints, int[] scores, ArrayList<String> names) {
+	public HighScore(String id, int maxPoints, ArrayList<Integer> scores, ArrayList<String> names) {
 		this.setId(id);
 		this.setMaxPoints(maxPoints);
 		this.setScores(scores);
 		this.setNames(names);
 	}
 
-	@XmlAttribute
 	public String getId() {
 		return id;
 	}
@@ -41,11 +37,11 @@ public class HighScore implements Serializable {
 		this.maxPoints = maxPoints;
 	}
 
-	public int[] getScores() {
+	public ArrayList<Integer> getScores() {
 		return scores;
 	}
 
-	public void setScores(int[] scores) {
+	public void setScores(ArrayList<Integer> scores) {
 		this.scores = scores;
 	}
 

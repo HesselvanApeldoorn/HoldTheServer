@@ -3,6 +3,7 @@ package rmiClient;
 import java.io.Serializable;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
@@ -17,6 +18,7 @@ import model.HighScore;
 import model.HighScoreDao;
 
 import rmiBase.HighScoreTask;
+import rmiServer.SendHighScoreStarter;
 import server.HighScoresResource;
 
 public class HighScoreList implements HighScoreTask<HighScore>, Serializable {
@@ -31,20 +33,21 @@ public class HighScoreList implements HighScoreTask<HighScore>, Serializable {
 		
 	public void execute(HighScore h) {
 		HighScoreDao.contentProvider.put(h.getId(), h);
-		System.out.println(h.getId());
-		System.out.println(HighScoreDao.contentProvider.values());
-		HighScoresResource.add(HighScoreDao.contentProvider);
 	    ClientConfig config = new DefaultClientConfig();
 	    Client client = Client.create(config);
 	    WebResource service = client.resource(getBaseURI());
 	    // Fluent interfaces
 //	    System.out.println(service.path("rest").path("HighScores").accept(MediaType.APPLICATION_XML).get(ClientResponse.class).toString());
 //	    System.out.println("a");
-//	    System.out.println(service.path("rest").path("HighScores").accept(MediaType.APPLICATION_XML).put(ClientResponse.class, HighScoreDao.contentProvider));
-//	    System.out.println("b");
+	    System.out.println(service.path("rest").path("HighScores").accept(MediaType.TEXT_PLAIN).put(ClientResponse.class, h).toString());
+	    Random random = new Random();
+	    System.out.println(random.nextInt(9000));
+	    //		System.out.println("Total number of polls:" + service.path("rest").path("HighScores").path("count").accept(MediaType.TEXT_HTML).get(String.class));
+
+	    //	    System.out.println("b");
 	}
 	 private static URI getBaseURI() {
-		 return UriBuilder.fromUri("http://192.168.178.11:8080/HoldTheServer").build();
+		 return UriBuilder.fromUri("http://"+SendHighScoreStarter.ipAddress+":8080/HoldTheServer").build();
 	 }
 
 }
