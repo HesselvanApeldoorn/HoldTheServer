@@ -32,6 +32,11 @@ public class HighScoresResource {
 	@Context
 	Request request;
 	
+	public HighScoresResource() {
+		System.out.println("new highscoredao");
+//		new HighScoreDao();
+	}
+	
 	
 	// Return the list of HighScores to the user in the browser
 	@GET
@@ -51,22 +56,30 @@ public class HighScoresResource {
 	 return highScores; 
 	}
 	
+	@GET
+	@Path("new")
+	@Produces(MediaType.TEXT_HTML)
+	public static String getNew() {
+		new HighScoreDao();
+		return "made new HighScoreDao";
+	}
+	
 	
 	@GET
 	@Path("count")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.TEXT_HTML)
 	public static String getCount() {
-		//int count = HighScoreDao.contentProvider.size();
-		Hello hello = new Hello("foi");
-		return hello.sayHello();
-//		return String.valueOf(count);
+		int count = HighScoreDao.contentProvider.size();
+//		Hello hello = new Hello("foi");
+//		return hello.sayHello();
+		return String.valueOf(count);
 	}
 	
 	// This method is called if HTML is request
 	@GET
 	@Produces(MediaType.TEXT_HTML)
 	public static String sayHtmlHello() {
-		new HighScoreDao();
+//		new HighScoreDao();
 		String output = "";
 		output += "<html> " + "<head>" + "<title>" + "HighScore system" + "</title>" +
 				"</head>" + "<body>";
@@ -88,9 +101,10 @@ public class HighScoresResource {
 	
 	 @PUT
 	 @Consumes(MediaType.APPLICATION_XML)
-    public void update(JAXBElement<Map<String, HighScore>> cp) {
+    public void update(JAXBElement<HighScore> highScore) {
 			System.out.println("in update");
-	        HighScoreDao.contentProvider=cp.getValue();
+	        HighScoreDao.contentProvider.put(highScore.getValue().getId(), highScore.getValue());
+	        System.out.println(HighScoreDao.contentProvider.values());
     }
 	
 //	@PUT
