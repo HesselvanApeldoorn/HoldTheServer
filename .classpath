@@ -13,7 +13,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/hessel/glassfish3/glassfish/lib/appserv-rt.jar"/>
-	<classpathentry kind="lib" path="/home/hessel/glassfish3/glassfish/lib/javaee.jar"/>
+	<classpathentry kind="lib" path="/home/s1881140/glassfish3/glassfish/lib/javaee.jar"/>
+	<classpathentry kind="lib" path="/home/s1881140/glassfish3/glassfish/lib/appserv-rt.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -23,7 +23,7 @@ import rmiBase.RmiStarter;
 
 public class SendHighScoreStarter extends RmiStarter {
 
-	public final static String ipAddress = "192.168.178.11";
+	public final static String ipAddress = "129.125.74.37";
 	public final static int port = 2626;
 	
 	public SendHighScoreStarter() {
@@ -41,7 +41,7 @@ public class SendHighScoreStarter extends RmiStarter {
 	}
 
 	private static URI getBaseURI() {
-		 return UriBuilder.fromUri("http://192.168.178.11:8080/HoldTheServer").build();
+		 return UriBuilder.fromUri("http://129.125.74.37:8080/HoldTheServer").build();
 	}
 
 	@Override
