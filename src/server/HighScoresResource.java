@@ -32,12 +32,6 @@ public class HighScoresResource {
 	@Context
 	Request request;
 	
-	public HighScoresResource() {
-		System.out.println("new highscoredao");
-//		new HighScoreDao();
-	}
-	
-	
 	// Return the list of HighScores to the user in the browser
 	@GET
 	@Produces(MediaType.TEXT_XML)
@@ -78,25 +72,14 @@ public class HighScoresResource {
 		return String.valueOf(count);
 	}
 	
-	private boolean isInteger(String str) {
-	    try {
-	        Integer.parseInt(str);
-	        return true;
-	    } catch (NumberFormatException nfe) {
-	        return false;
-	    }
-	}
-	
 	// This method is called if HTML is request
 	@GET
 	@Produces(MediaType.TEXT_HTML)
 	public static String sayHtmlHello() {
-//		new HighScoreDao();
 		String output = "";
 		output += "<html> " + "<head>" + "<title>" + "HighScore system" + "</title>" +
 				"</head>" + "<body>";
 	    output += "<h2>Highscores:</h2>";
-	    output += HighScoreDao.contentProvider;
 	    for(int i=0; i<getHighScoresBrowser().size();i++) {
 	        output += "<br>Maximum points: <a href='/RESTHighScore/rest/HighScores/" + getHighScoresBrowser().get(i).getId() + "'> " + getHighScoresBrowser().get(i).getMaxPoints() + "</a>";
 	        HighScore highScore = getHighScoresBrowser().get(i);
@@ -114,8 +97,6 @@ public class HighScoresResource {
 	 @PUT
 	 @Consumes(MediaType.APPLICATION_XML)
     public void update(JAXBElement<HighScore> highScore) {
-			System.out.println("in update");
 	        HighScoreDao.contentProvider.put(highScore.getValue().getId(), highScore.getValue());
-	        System.out.println(HighScoreDao.contentProvider.values());
     }
 }

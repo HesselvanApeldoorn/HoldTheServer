@@ -36,7 +36,6 @@ public class SendHighScoreStarter extends RmiStarter {
 	    Client client = Client.create(config);
 	    WebResource service = client.resource(getBaseURI());
 
-	    System.out.println(service.path("rest").path("HighScores").accept(MediaType.TEXT_HTML).get(ClientResponse.class).toString());
 	    String amountScores = service.path("rest").path("HighScores").path("count").accept(MediaType.TEXT_HTML).get(ClientResponse.class).toString();
 	    int amountHighScore = 0;
 	    if(isInteger(amountScores)) {

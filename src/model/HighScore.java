@@ -14,6 +14,8 @@ public class HighScore implements Serializable {
 	private ArrayList<Integer> scores;
 	private ArrayList<String> names; 
 	
+	public HighScore() {}
+	
 	public HighScore(String id, int maxPoints, ArrayList<Integer> scores, ArrayList<String> names) {
 		this.setId(id);
 		this.setMaxPoints(maxPoints);

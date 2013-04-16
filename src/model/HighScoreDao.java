@@ -30,7 +30,6 @@ public class HighScoreDao {
 		scores2.add(12);
 	    highScore = new HighScore("2", 20, scores2,names2);
 	    contentProvider.put("2", highScore);
-	    System.out.println("resetted highscoredao");
   }
   
   public static Map<String, HighScore> getModel() {
